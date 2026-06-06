@@ -4,6 +4,8 @@ import React from "react";
 import axios from 'axios';
 
 const Register = ({ setToken }) => {
+  const API_URL = "https://taskflow-mern-oibm.onrender.com";
+
   const [formData, setFormData] = useState({ name: '', email: '', password: '' });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -12,8 +14,10 @@ const Register = ({ setToken }) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await axios.post('http://localhost:5000/api/auth/register', formData);
-      setToken(res.data.token);
+const res = await axios.post(
+  `${API_URL}/api/auth/register`,
+  formData );
+        setToken(res.data.token);
       localStorage.setItem('user', JSON.stringify(res.data.user));
     } catch (err) {
       setError(err.response?.data?.message || 'Registration failed');

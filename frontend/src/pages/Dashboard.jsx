@@ -4,6 +4,7 @@ import axios from 'axios';
 import { FiPlus, FiCheck, FiTrash2, FiEdit2 } from 'react-icons/fi';
 
 const Dashboard = ({ token, setToken }) => {
+  const API_URL = "https://taskflow-mern-oibm.onrender.com";
   const [tasks, setTasks] = useState([]);
   const [filter, setFilter] = useState('all');
   const [search, setSearch] = useState('');
@@ -19,7 +20,7 @@ const Dashboard = ({ token, setToken }) => {
 
   const fetchTasks = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/api/tasks', {
+      const res = await axios.get(`${API_URL}/api/tasks`,  {
         headers: { Authorization: `Bearer ${token}` }
       });
       setTasks(res.data);
@@ -31,7 +32,7 @@ const Dashboard = ({ token, setToken }) => {
   const addTask = async () => {
     if (!newTask.title || !newTask.description) return;
     try {
-      await axios.post('http://localhost:5000/api/tasks', newTask, {
+      await axios.post(`${API_URL}/api/tasks`, newTask, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setNewTask({ title: '', description: '' });
@@ -44,8 +45,8 @@ const Dashboard = ({ token, setToken }) => {
 
   const toggleStatus = async (id, status) => {
     try {
-      await axios.put(`http://localhost:5000/api/tasks/${id}`, 
-        { status: status === 'pending' ? 'completed' : 'pending' }, 
+       await axios.put(`${API_URL}/api/tasks/${id}`,
+          { status: status === 'pending' ? 'completed' : 'pending' }, 
         { headers: { Authorization: `Bearer ${token}` } }
       );
       fetchTasks();
@@ -57,8 +58,8 @@ const Dashboard = ({ token, setToken }) => {
   const deleteTask = async (id) => {
     if (!window.confirm('Delete this task?')) return;
     try {
-      await axios.delete(`http://localhost:5000/api/tasks/${id}`, {
-        headers: { Authorization: `Bearer ${token}` }
+await axios.delete(`${API_URL}/api/tasks/${id}`, {   
+      headers: { Authorization: `Bearer ${token}` }
       });
       fetchTasks();
     } catch (err) {
