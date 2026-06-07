@@ -4,8 +4,7 @@ import React from "react";
 import axios from 'axios';
 
 const Register = ({ setToken }) => {
-  const API_URL = "https://taskflow-mern-oibm.onrender.com";
-
+const API_URL = "http://localhost:5000";
   const [formData, setFormData] = useState({ name: '', email: '', password: '' });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
