@@ -18,6 +18,8 @@ const res = await axios.post(
   `${API_URL}/api/auth/register`,
   formData );
         setToken(res.data.token);
+        localStorage.setItem("token", res.data.token); 
+
       localStorage.setItem('user', JSON.stringify(res.data.user));
     } catch (err) {
       setError(err.response?.data?.message || 'Registration failed');

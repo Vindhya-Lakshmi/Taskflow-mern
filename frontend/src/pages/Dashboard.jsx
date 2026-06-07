@@ -26,6 +26,8 @@ const Dashboard = ({ token, setToken }) => {
       setTasks(res.data);
     } catch (err) {
       console.error(err);
+      console.log("Dashboard Token:", token);
+      console.log("Local Token:", localStorage.getItem("token"));
     }
   };
 

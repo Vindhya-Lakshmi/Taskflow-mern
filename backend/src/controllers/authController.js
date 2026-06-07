@@ -20,6 +20,8 @@ const register = async (req, res) => {
       user: { id: user._id, name: user.name, email: user.email }
     });
   } catch (error) {
+  console.error("Register Error:", error);
+
     res.status(500).json({ message: 'Server error' });
   }
 };
